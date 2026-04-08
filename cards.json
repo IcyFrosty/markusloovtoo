@@ -1,0 +1,428 @@
+[
+  {
+    "id": "IMG_1475",
+    "type": "Event",
+    "subtype": "Environment",
+    "title": "Ice Age",
+    "description": "Put a campfire token randomly in every sector (total 4). Every time a player starts a turn more than 2 tiles away from a campfire, they get 1 freeze token. They move 1 less for each freeze token (min 1 MOV). If you start a turn near a campfire (2 tiles), then remove all freeze tokens. Gain 1 warmth token. Next time you were to gain a freeze token, remove that instead. (It stacks). All enemies get -1 MOV constantly.",
+    "notes": "NB! This card stays on the field until a different environmental card is drawn.",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1478",
+    "type": "Event",
+    "title": "Double Loot",
+    "description": "The next player to loot a container gets to pull 2 cards instead of 1. If the container only has 1 loot, the player can scout a nearby container (3 tiles) and take 1 item from it.",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1480",
+    "type": "Event",
+    "title": "The Fog",
+    "description": "A thick fog covers the board. All players and monsters have their vision reduced to 1 tile. Ranged attacks are impossible unless the target is adjacent. Movement is not affected, but you cannot see what is in a tile until you enter it. Lasts 3 rounds.",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1481",
+    "type": "Event",
+    "title": "Spawn Zombie",
+    "description": "Put a zombie minion marker on a random square. The zombie activates after the main monster. It acts like the main monster, chasing and knocking out players. It can move 3 tiles. If the zombie is knocked out / stunned, it is defeated. Remove it from the board. It doesn't share the same danger as the main monster.",
+    "stats": {
+      "ATK": 3,
+      "DEF": 3,
+      "MOV": 3
+    },
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1482",
+    "type": "Event",
+    "title": "The Mixer",
+    "description": "Roll a D4 to determine a random player. That player is placed on a random tile.",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1483",
+    "type": "Event",
+    "title": "Toxic Gas",
+    "description": "Roll 2 D8 dice. The sum of those dice is what sector becomes filled with gas. Anyone in that sector at the end of their turn is knocked out. Disappears after 2 rounds.",
+    "notes": "Sectors on the map. (1 can't be the target)",
+    "diagram": "grid_1_16",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1484",
+    "type": "Event",
+    "title": "Mind Control",
+    "description": "Determine a random player. That player becomes mind controlled. That player's token cannot be controlled for 2 turns. He will move 4 tiles and attack other players, knocking them out. If he is stunned knock him out. After 3 turns or after being KO'd return control.",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1485",
+    "type": "Event",
+    "title": "The Slime",
+    "description": "Roll a D4. The result is which of the 4 areas is covered in slime. Everything in there moves 2 tiles slower. Lasts 2 rounds.",
+    "diagram": "grid_2x2",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1486",
+    "type": "Event",
+    "title": "Bat Swarm",
+    "description": "Everyone below 3 ATK will be stunned for 1 turn.",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1487",
+    "type": "Event",
+    "title": "Divine Protection",
+    "description": "Players can choose a player that will become blessed and negates the next attack that would knock him out. Stun the attacker if possible or destroy. Then remove Divine Protection. If chosen player was already knocked out, revive him. Also the player can discard any negative effects on him.",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1488",
+    "type": "Event",
+    "title": "Double Trouble",
+    "description": "Pull another card from the event deck. That event triggers an additional time, then discard this and the other card. If this was the last card in the deck, reshuffle and refill event card before resolving this card.",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1489",
+    "type": "Event",
+    "title": "Ammunition",
+    "description": "Each player gains 1 random tool. If that tool would be a passive item, draw until you get an active one. Then discard other passive tools.",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1490",
+    "type": "Event",
+    "title": "Double ATK",
+    "description": "All players deal twice as much damage. If the monster is hit, it is stunned twice as long. Lasts 2 rounds.",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1491",
+    "type": "Event",
+    "title": "Switcher",
+    "description": "Move the next objective to a random square.",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1492",
+    "type": "Event",
+    "title": "Regroup",
+    "description": "All players choose a tile to gather around (the same point).",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1493",
+    "type": "Event",
+    "title": "Angry Monster",
+    "description": "The monster activates another time.",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1494",
+    "type": "Event",
+    "title": "Meteorite",
+    "description": "Choose a random coordinate. Everyone in a 4 tile radius of that tile is knocked out. The monster gets stunned, if in range. Discard after resolving.",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1495",
+    "type": "Event",
+    "title": "Acid rain",
+    "description": "Everyone below 3 def will be stunned.",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1496",
+    "type": "Event",
+    "title": "Loot drop",
+    "description": "Drop one loot token on a random tile for each player.",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1497",
+    "type": "Event",
+    "title": "Lava",
+    "description": "Put a lava token on a random tile. Noone can stand end their turn on that tile and all loot tokens on that tile will be destroyed. If a crucial token needed for completing the game would be destroyed, reroll lava coords.",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1498",
+    "type": "Event",
+    "title": "Roulette",
+    "description": "Everyone rolls a D6. If result is a 1, you get knocked out / destroyed / stunned (if villain).",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1499",
+    "type": "Event",
+    "title": "Slime",
+    "description": "Roll a D4. Everyone in the corresponding sector is immobilized.",
+    "diagram": "quadrants_2_1_3_4",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1500",
+    "type": "Event",
+    "title": "Lightning",
+    "description": "Random square. Anyone on that square is KO'd / destroyed / stunned (villain). Everyone in a 2 tile radius is stunned.",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1501",
+    "type": "Event",
+    "title": "Stun gun roulette",
+    "description": "Every player and monster on the map rolls a D6. If anyone rolls a 1, they are stunned. Not knocked out. Stunned means you skip your next turn.",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1503",
+    "type": "Event",
+    "title": "Earthquake",
+    "description": "Everyone rolls a D6. On a 1 you lose -1 hp and you are stunned. Monsters too.",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1504",
+    "type": "Event",
+    "title": "Fog of War",
+    "description": "Everyone has -1 tile of sight. (MOV cards)",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1505",
+    "type": "Equipment",
+    "title": "Backpack",
+    "description": "Allows to cary +2 weight.",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1506",
+    "type": "Event",
+    "title": "Heavy rain",
+    "description": "-1 MOV for everyone (including monsters).",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1507",
+    "type": "Event",
+    "title": "Come to me",
+    "description": "Every player move towards the villain equal to their MOV, if possible.",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1508",
+    "type": "Event",
+    "title": "Meteor impact",
+    "description": "Choose a random tile. Everyone in a 4 tile radius gets knocked out (including monsters). Leave a loot token at the impact coordinates.",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1509",
+    "type": "Event",
+    "title": "Living rock",
+    "description": "Spawn a golem.\nGolem stats: ATK 4, DEF 6, MOV 2",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1510",
+    "type": "Survivor",
+    "title": "Fighter",
+    "stats": { "ATK": 4, "DEF": 3, "MOV": 4 },
+    "description": "Can have 2 equipped weapons. All equipped weapons give +1 ATK. If you defeat an enemie, you get an extra action.",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1511",
+    "type": "Survivor",
+    "title": "Scientist",
+    "stats": { "ATK": 1, "DEF": 1, "MOV": 4 },
+    "description": "Solving puzzles doesn't take an action. You can craft as a special action: Roll a D4. On a 4 you gain a random tool.",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1512",
+    "type": "Survivor",
+    "title": "Medic",
+    "stats": { "ATK": 1, "DEF": 3, "MOV": 4 },
+    "description": "Reviving someone doesn't take an action! After reviving, you and other player get +1 MOV.",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1513",
+    "type": "Survivor",
+    "title": "Athlete",
+    "stats": { "ATK": 2, "DEF": 2, "MOV": 5 },
+    "description": "Can move double their distance at the cost of not being able to make an action after.",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1514",
+    "type": "Villain",
+    "title": "Stalker",
+    "stats": "ATK 10, DEF 10, MOV 4",
+    "description": "At the start of the villain turn, the stalker moves directly towards the closest player. If it's already on the same tile as a player, then it will attack it instead (twice).",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1515",
+    "type": "Villain",
+    "title": "Gambler",
+    "stats": "ATK D6, DEF D6, MOV D6",
+    "description": "Draw an event card at the start of villains turn, then roll a D6.\n1 - Gambler is stunned.\n2 - All players discard a tool.\n3 - Gambler moves to the farthest player.\n4 - Create another puzzle on the map.\n5 - Gambler gets +1 to all stats this turn.\n6 - Roll another D6. If it's a 6 also, Gambler wins the game.",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1516",
+    "type": "Villain",
+    "title": "Trapper",
+    "stats": "ATK 3, DEF 5, MOV 4",
+    "description": "Every time a player stops moving for their last time that turn they roll a D6. If it's a 1, then they get immobilized. If 2, immobilized. Every time a player interacts with a puzzle objective they get immobilized.",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1517",
+    "type": "Villain",
+    "title": "Necromancer",
+    "stats": "ATK 3, DEF 3, MOV 3",
+    "description": "At the beginning of villain turn, roll a D6 and add the amount of players to the roll. If the total score is at least 6, then create a zombie in a random place.",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1518",
+    "type": "Villain",
+    "title": "Hunter",
+    "stats": "ATK 5, DEF 3, MOV -",
+    "description": "At the start of the villain turn, instantly move to the closest player and attack them. This replaces normal moving after players.",
+    "size": "2x Landscape"
+  },
+  {
+    "id": "IMG_1519",
+    "type": "Tool",
+    "title": "MedKit",
+    "description": "Use this card to revive yourself or an adjacent player without costing a turn. (2 uses)",
+    "size": "Poker"
+  },
+  {
+    "id": "IMG_1520",
+    "type": "Tool",
+    "title": "Bear trap",
+    "description": "Use to place down a marker. If any monster would cross this marker, they get stunned. (3 uses)",
+    "size": "Poker"
+  },
+  {
+    "id": "IMG_1521",
+    "type": "Tool",
+    "title": "MedKit",
+    "description": "Use this item revive yourself or an ally without it costing an action. (2 uses)",
+    "size": "Poker"
+  },
+  {
+    "id": "IMG_1522",
+    "type": "Tool",
+    "title": "Lightning shoes",
+    "description": "When you have this item, you can move +1 tile every turn.",
+    "size": "Poker"
+  },
+  {
+    "id": "IMG_1523",
+    "type": "Tool",
+    "title": "Unstable plasma cannon",
+    "description": "Use this item to stun an enemy. Then roll a D6. If you rolled a 1 or 2, you get knocked out. Then discard this card.",
+    "size": "Poker"
+  },
+  {
+    "id": "IMG_1524",
+    "type": "Tool",
+    "title": "Tazer",
+    "description": "Use it to stun a monster. (4 range) 2 uses (use dice or tokens to mark uses).",
+    "size": "Poker"
+  },
+  {
+    "id": "IMG_1525",
+    "type": "Tool",
+    "title": "Decrypter",
+    "description": "You can solve any objective without it costing an action. (Color doesn't matter). 1 use.",
+    "size": "Poker"
+  },
+  {
+    "id": "IMG_1526",
+    "type": "Tool",
+    "title": "Flashbang",
+    "description": "Stuns all enemies in a 3 tile radius of you. 2 uses.",
+    "size": "Poker"
+  },
+  {
+    "id": "IMG_1527",
+    "type": "Tool",
+    "title": "Tazer",
+    "description": "Stun someone in a 4 tile range. 2 uses.",
+    "size": "Poker"
+  },
+  {
+    "id": "IMG_1528",
+    "type": "Tool",
+    "title": "Flashlight",
+    "description": "+1 tile of sight.",
+    "size": "Poker"
+  },
+  {
+    "id": "IMG_1529",
+    "type": "Tool",
+    "title": "Chillie mist",
+    "description": "Villain enemies don't target you.",
+    "size": "Poker"
+  },
+  {
+    "id": "IMG_1530",
+    "type": "Tool",
+    "title": "Tazer",
+    "description": "Stun someone in a 3 tile range. 2 uses.",
+    "size": "Poker"
+  },
+  {
+    "id": "IMG_1531",
+    "type": "Tool",
+    "title": "Bow",
+    "description": "Can attack someone up to 4 tiles away. They can't counterattack if your attack fails and you're outside of their range. 3 uses.",
+    "size": "Poker"
+  },
+  {
+    "id": "IMG_1532",
+    "type": "Tool",
+    "title": "MedKit",
+    "description": "Use this item to revive yourself or an ally without an action. 2 uses.",
+    "size": "Poker"
+  },
+  {
+    "id": "IMG_1533",
+    "type": "Tool",
+    "title": "Beartraps",
+    "description": "If any monster comes in a 2 tile radius of you, you can use this item to stun them. 2 uses.",
+    "size": "Poker"
+  },
+  {
+    "id": "IMG_1534",
+    "type": "Tool",
+    "title": "Baton (1 handed)",
+    "description": "+1 ATK",
+    "size": "Poker"
+  },
+  {
+    "id": "IMG_1535",
+    "type": "Tool",
+    "title": "Lightning shoes",
+    "description": "+1 MOV",
+    "size": "Poker"
+  },
+  {
+    "id": "IMG_1536",
+    "type": "Tool",
+    "title": "MedKit",
+    "description": "Use this item to revive yourself or an ally without it costing an action. 2 uses.",
+    "size": "Poker"
+  }
+]

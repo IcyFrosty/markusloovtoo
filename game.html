@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Helix Alpha — Digital Edition</title>
+  <meta name="description" content="A cooperative escape board game. Collect key dice, dodge the villain, and escape — playable in your browser.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/game.css">
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+     SETUP SCREEN
+════════════════════════════════════════ -->
+<div id="setup-screen" class="screen active">
+  <div class="setup-header">
+    <div class="setup-title">HELIX ALPHA</div>
+    <div class="setup-sub">COOPERATIVE ESCAPE — DIGITAL EDITION</div>
+  </div>
+
+  <!-- Player count -->
+  <div>
+    <div class="setup-section-label">Number of Players</div>
+    <div class="player-count-buttons">
+      <button class="btn-count" data-count="1" id="btn-count-1">1<span>SOLO</span></button>
+      <button class="btn-count" data-count="2" id="btn-count-2">2<span>PLAYERS</span></button>
+      <button class="btn-count" data-count="3" id="btn-count-3">3<span>PLAYERS</span></button>
+      <button class="btn-count" data-count="4" id="btn-count-4">4<span>PLAYERS</span></button>
+    </div>
+  </div>
+
+  <!-- Class selection (populated by JS) -->
+  <div>
+    <div class="setup-section-label">Choose Your Class <span class="text-muted" style="font-size:0.65rem">(pick one per player slot)</span></div>
+    <div class="class-grid" id="class-grid"></div>
+  </div>
+
+  <!-- Start button -->
+  <button id="btn-start-game" disabled>Launch Mission</button>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     GAME SCREEN
+════════════════════════════════════════ -->
+<div id="game-screen" class="screen">
+
+  <!-- Top bar -->
+  <div class="game-topbar">
+    <div class="topbar-title">⬡ HELIX ALPHA</div>
+    <div id="phase-indicator" class="phase-setup">SETUP</div>
+    <div id="round-counter">Round 0</div>
+  </div>
+
+  <!-- Main 3-column layout -->
+  <div class="game-main">
+
+    <!-- LEFT: Player HUDs -->
+    <div id="player-huds"></div>
+
+    <!-- CENTER: Board + action bar -->
+    <div style="display:flex;flex-direction:column;overflow:hidden;min-height:0">
+
+      <!-- Board -->
+      <div id="board-container" style="flex:1;overflow:auto;display:flex;align-items:center;justify-content:center;padding:8px">
+        <div>
+          <div class="board-coords-row" style="padding-left:20px"></div>
+          <div class="board-with-coords">
+            <div class="board-coords-col"></div>
+            <div id="board"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action bar -->
+      <div id="action-bar">
+        <button class="action-btn primary"  id="btn-attack"      onclick="onActionAttack()"      style="display:none">⚔ Attack</button>
+        <button class="action-btn warning"  id="btn-pickup-die"  onclick="onActionPickupDie()"   style="display:none">🎲 Pick Up Key Die</button>
+        <button class="action-btn success"  id="btn-unlock-exit" onclick="onActionUnlockExit()"  style="display:none">🚪 Use Exit</button>
+        <button class="action-btn primary"  id="btn-use-tool"    onclick="onActionUseTool()"     disabled>🛠 Use Tool</button>
+        <button class="action-btn primary"  id="btn-special"     onclick="onActionSpecial()"     style="display:none">★ Special</button>
+        <div style="flex:1"></div>
+        <button class="action-btn neutral"  id="btn-end-turn"    onclick="onActionEndTurn()"     disabled>End Turn ▶</button>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: Villain + log -->
+    <div id="right-sidebar">
+      <div id="villain-panel"></div>
+      <div id="zombie-list"></div>
+      <div id="game-log-container">
+        <div class="log-section-label">Game Log</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Event row -->
+  <div id="event-row-container">
+    <div class="event-row-label">EVENT ROW</div>
+    <div id="event-row"></div>
+  </div>
+
+</div>
+
+
+<!-- ════════════════════════════════════════
+     VILLAIN REVEAL MODAL
+════════════════════════════════════════ -->
+<div id="villain-reveal-modal" class="modal-overlay">
+  <div class="modal-box">
+    <div style="font-family:'Share Tech Mono',monospace;font-size:0.7rem;letter-spacing:0.2em;color:var(--text-secondary);text-align:center;margin-bottom:8px">YOUR VILLAIN IS</div>
+    <span class="villain-reveal-icon" id="vr-icon">👁</span>
+    <div class="modal-title" id="vr-name" style="color:var(--villain)">Stalker</div>
+    <div class="villain-reveal-stats">
+      <div class="villain-reveal-stat"><span class="v-label">ATK</span><span class="v-val" id="vr-atk">—</span></div>
+      <div class="villain-reveal-stat"><span class="v-label">DEF</span><span class="v-val" id="vr-def">—</span></div>
+      <div class="villain-reveal-stat"><span class="v-label">MOV</span><span class="v-val" id="vr-mov">—</span></div>
+    </div>
+    <div class="villain-reveal-ability" id="vr-ability"></div>
+    <div class="modal-btn-row">
+      <button class="modal-btn primary" id="vr-ok-btn">Begin Game</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     COMBAT DICE MODAL
+════════════════════════════════════════ -->
+<div id="dice-modal" class="modal-overlay">
+  <div class="modal-box">
+    <!-- Content injected by dice.js -->
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     EVENT DETAIL MODAL
+════════════════════════════════════════ -->
+<div id="event-detail-modal" class="modal-overlay" onclick="this.classList.remove('active')">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-title" id="ed-title" style="color:var(--key-die)">Event</div>
+    <div class="event-desc-full" id="ed-desc"></div>
+    <div class="modal-btn-row">
+      <button class="modal-btn secondary" onclick="document.getElementById('event-detail-modal').classList.remove('active')">Close</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     TOOL USE MODAL
+════════════════════════════════════════ -->
+<div id="tool-modal" class="modal-overlay">
+  <div class="modal-box">
+    <div class="modal-title" id="tm-title" style="color:var(--p1)">Use Tool</div>
+    <div class="tool-desc" id="tm-desc"></div>
+    <div class="tool-targets" id="tm-targets"></div>
+    <div class="modal-btn-row">
+      <button class="modal-btn secondary" id="tm-cancel-btn">Cancel</button>
+      <button class="modal-btn primary"   id="tm-use-btn">Use</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     ENDGAME MODAL
+════════════════════════════════════════ -->
+<div id="endgame-modal" class="modal-overlay">
+  <div class="modal-box">
+    <div class="endgame-icon" id="endgame-icon">🚪</div>
+    <div class="modal-title" id="endgame-title">Game Over</div>
+    <div class="endgame-subtitle" id="endgame-subtitle"></div>
+    <div class="endgame-round" id="endgame-round"></div>
+    <div class="modal-btn-row">
+      <button class="modal-btn primary" onclick="location.reload()">Play Again</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════ -->
+<script type="module" src="src/game.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive print-ready card manager for the Helix Alpha board game prototype.">
+    <title>Helix Alpha Card Manager</title>
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="title-area">
+            <h1>Helix Alpha Card Manager</h1>
+            <p>Digitized and editable game cards</p>
+        </div>
+        <div class="controls">
+            <div class="filter-group">
+                <button id="filter-all" class="active">All Cards</button>
+                <button id="filter-tool">Tools</button>
+                <button id="filter-villain">Villains</button>
+                <button id="filter-survivor">Survivors</button>
+                <button id="filter-event">Events</button>
+            </div>
+            <button id="print-btn" class="primary">&#x2399; Print Cards</button>
+        </div>
+    </header>
+
+    <main id="card-grid" class="card-grid">
+        <!-- Cards will be rendered here -->
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cardGrid = document.getElementById('card-grid');
+            const printBtn = document.getElementById('print-btn');
+            let cardsData = [];
+
+            // Safely escape HTML to prevent XSS and broken rendering
+            function escapeHtml(str) {
+                if (!str && str !== 0) return '';
+                return String(str)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;');
+            }
+
+            // Load cards from cards.json
+            fetch('cards.json')
+                .then(response => {
+                    if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
+                    return response.json();
+                })
+                .then(data => {
+                    cardsData = data;
+                    renderCards(data);
+                })
+                .catch(err => {
+                    console.error('Error loading cards:', err);
+                    cardGrid.innerHTML = `<p class="load-error">Could not load cards.json (${escapeHtml(err.message)}). Open this file via a local server (e.g. <code>npx serve .</code>).</p>`;
+                });
+
+            function renderCards(cardsToRender) {
+                cardGrid.innerHTML = '';
+
+                if (cardsToRender.length === 0) {
+                    cardGrid.innerHTML = '<p class="load-error">No cards found for this filter.</p>';
+                    return;
+                }
+
+                cardsToRender.forEach(card => {
+                    const cardEl = document.createElement('div');
+                    cardEl.className = 'card';
+                    cardEl.setAttribute('data-size', card.size || 'Poker');
+                    cardEl.setAttribute('data-id', card.id);
+                    cardEl.setAttribute('data-type', card.type);
+
+                    // Handle Stats display
+                    let statsHtml = '';
+                    if (card.stats) {
+                        let statsText;
+                        if (typeof card.stats === 'object') {
+                            statsText = `ATK ${escapeHtml(card.stats.ATK)} | DEF ${escapeHtml(card.stats.DEF)} | MOV ${escapeHtml(card.stats.MOV)}`;
+                        } else {
+                            statsText = escapeHtml(card.stats);
+                        }
+                        statsHtml = `<div class="card-stats" contenteditable="true">${statsText}</div>`;
+                    }
+
+                    // Handle Diagram reference
+                    let diagramHtml = '';
+                    if (card.diagram) {
+                        diagramHtml = `<div class="card-diagram">[Diagram: ${escapeHtml(card.diagram)}]</div>`;
+                    }
+
+                    // Handle Notes
+                    let notesHtml = '';
+                    if (card.notes) {
+                        notesHtml = `<div class="card-notes" contenteditable="true">${escapeHtml(card.notes)}</div>`;
+                    }
+
+                    // Preserve newlines in description as line breaks
+                    const descText = escapeHtml(card.description).replace(/\n/g, '<br>');
+
+                    cardEl.innerHTML = `
+                        <div class="card-header">
+                            <span class="card-type">${escapeHtml(card.type)}</span>
+                            <span class="card-id">${escapeHtml(card.id)}</span>
+                        </div>
+                        <div class="card-title" contenteditable="true">${escapeHtml(card.title)}</div>
+                        ${statsHtml}
+                        <div class="card-description" contenteditable="true">${descText}</div>
+                        ${diagramHtml}
+                        ${notesHtml}
+                    `;
+                    cardGrid.appendChild(cardEl);
+                });
+            }
+
+            // Filtering — only apply to #filter-* buttons, not #print-btn
+            document.querySelectorAll('.filter-group button').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const id = e.currentTarget.id; // filter-all, filter-tool, etc.
+                    const type = id.replace('filter-', '');
+
+                    if (type === 'all') {
+                        renderCards(cardsData);
+                    } else {
+                        const filtered = cardsData.filter(c => c.type.toLowerCase() === type);
+                        renderCards(filtered);
+                    }
+
+                    // Update active filter button
+                    document.querySelectorAll('.filter-group button').forEach(b => b.classList.remove('active'));
+                    e.currentTarget.classList.add('active');
+                });
+            });
+
+            // Printing
+            printBtn.addEventListener('click', () => window.print());
+        });
+    </script>
+</body>
+</html>
