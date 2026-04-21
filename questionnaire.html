@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helix Alpha — Game Design Questionnaire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0d1117;
+            --surface: #161b22;
+            --surface-2: #1c2333;
+            --border: #30363d;
+            --text: #e6edf3;
+            --text-muted: #8b949e;
+            --accent: #58a6ff;
+            --accent-glow: rgba(88, 166, 255, 0.15);
+            --green: #3fb950;
+            --orange: #d29922;
+            --red: #f85149;
+            --purple: #bc8cff;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 40px 20px 100px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--purple));
+            transition: width 0.4s ease;
+            z-index: 100;
+        }
+
+        .section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 20px;
+            transition: border-color 0.3s ease;
+        }
+
+        .section:hover { border-color: var(--accent); }
+
+        .section.answered { border-color: var(--green); }
+        .section.answered::after {
+            content: '✓';
+            float: right;
+            margin-top: -42px;
+            color: var(--green);
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .section-number {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .section h2 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .section .hint {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 16px;
+        }
+
+        .option-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .option-btn {
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: var(--text);
+            font-family: inherit;
+            font-size: 0.9rem;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .option-btn:hover {
+            border-color: var(--accent);
+            background: var(--accent-glow);
+        }
+
+        .option-btn.selected {
+            border-color: var(--green);
+            background: rgba(63, 185, 80, 0.1);
+        }
+
+        .option-btn .option-label {
+            font-weight: 600;
+        }
+
+        .option-btn .option-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        textarea, input[type="text"], input[type="number"] {
+            width: 100%;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: var(--text);
+            font-family: inherit;
+            font-size: 0.9rem;
+            resize: vertical;
+            transition: border-color 0.2s ease;
+        }
+
+        textarea:focus, input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        textarea { min-height: 80px; }
+
+        label.inline {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-bottom: 8px;
+        }
+
+        .number-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .number-row input { width: 80px; }
+        .number-row span { color: var(--text-muted); font-size: 0.85rem; }
+
+        .btn-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            padding: 14px 24px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            z-index: 50;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border-radius: 8px;
+            border: none;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #000;
+        }
+
+        .btn-primary:hover { filter: brightness(1.1); }
+
+        .btn-secondary {
+            background: var(--surface-2);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover { border-color: var(--accent); }
+
+        .btn-success {
+            background: var(--green);
+            color: #000;
+        }
+
+        .status-toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: var(--green);
+            color: #000;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            z-index: 200;
+        }
+
+        .status-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .counter {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 24px;
+        }
+
+        .counter strong { color: var(--green); }
+
+        .back-link {
+            display: inline-block;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin-bottom: 24px;
+        }
+
+        .back-link:hover { text-decoration: underline; }
+
+        .divider {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            margin: 36px 0 20px;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progress-bar"></div>
+    <div class="status-toast" id="toast">Saved!</div>
+
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to Card Manager</a>
+
+        <div class="header">
+            <h1>Game Design Questionnaire</h1>
+            <p>Answer these questions to finalize the Helix Alpha rules & design. Your answers auto-save in the browser.</p>
+        </div>
+
+        <div class="counter" id="counter">0 / 0 answered</div>
+
+        <div id="sections"></div>
+    </div>
+
+    <div class="btn-bar">
+        <button class="btn btn-secondary" onclick="resetAll()">Reset All</button>
+        <button class="btn btn-primary" onclick="downloadJSON()">⬇ Download Answers (JSON)</button>
+    </div>
+
+    <script>
+    const QUESTIONS = [
+        // ── THEME & SETTING ──
+        { category: "Theme & Setting", id: "setting", title: "Where is the game set?", hint: "This shapes all the artwork and flavor text.", type: "choice", options: [
+            { value: "space_station", label: "Abandoned Space Station", desc: "Sci-fi corridors, airlocks, zero-G zones" },
+            { value: "underground_bunker", label: "Underground Bunker / Lab", desc: "Concrete tunnels, flickering lights, experiments gone wrong" },
+            { value: "alien_planet", label: "Alien Planet Surface", desc: "Strange terrain, alien structures, hostile environment" },
+            { value: "ruined_city", label: "Post-Apocalyptic City", desc: "Crumbling buildings, overgrown streets, scavenger vibes" },
+            { value: "other", label: "Something else (describe below)", desc: "" }
+        ], allowCustom: true },
+
+        { category: "Theme & Setting", id: "backstory", title: "Why are the survivors there?", hint: "A one-sentence backstory. E.g., 'Crash-landed on an alien planet' or 'Trapped in a secret lab after an experiment went wrong.'", type: "text" },
+
+        { category: "Theme & Setting", id: "art_style", title: "What art style do you want for the cards?", hint: "This guides image generation.", type: "choice", options: [
+            { value: "dark_realistic", label: "Dark & Realistic", desc: "Gritty, cinematic, muted colors" },
+            { value: "stylized_comic", label: "Stylized / Comic Book", desc: "Bold lines, vibrant colors, action poses" },
+            { value: "pixel_retro", label: "Pixel Art / Retro", desc: "Nostalgic, 16-bit style" },
+            { value: "minimalist_icon", label: "Minimalist / Icon-based", desc: "Clean symbols, flat design, modern" },
+            { value: "other", label: "Something else (describe below)", desc: "" }
+        ], allowCustom: true },
+
+        // ── CORE MECHANICS ──
+        { category: "Core Mechanics", id: "player_hp", title: "Do players have HP (hit points)?", hint: "Some cards say 'lose -1 hp' but others say 'knocked out' instantly. Which is it?", type: "choice", options: [
+            { value: "no_hp", label: "No HP — one hit = knocked out", desc: "Simpler. Any attack that lands knocks you out. Teammates revive you." },
+            { value: "hp_3", label: "Yes, 3 HP each", desc: "Players can take a few hits before going down." },
+            { value: "hp_varies", label: "HP varies by class", desc: "Fighter has more HP, Scientist has less, etc." },
+            { value: "other", label: "Something else", desc: "" }
+        ], allowCustom: true },
+
+        { category: "Core Mechanics", id: "combat_system", title: "How does combat work?", hint: "When a player attacks a monster (or vice versa), what happens?", type: "choice", options: [
+            { value: "roll_vs_def", label: "Roll D6 + ATK vs. target's DEF", desc: "If your roll + ATK ≥ their DEF, you hit. Simple and fast." },
+            { value: "both_roll", label: "Both sides roll D6, add ATK/DEF", desc: "Attacker rolls D6+ATK, defender rolls D6+DEF. Higher wins." },
+            { value: "flat_compare", label: "Just compare ATK vs DEF", desc: "No dice — if your ATK ≥ their DEF, you hit. Deterministic." },
+            { value: "other", label: "Something else (describe)", desc: "" }
+        ], allowCustom: true },
+
+        { category: "Core Mechanics", id: "combat_result", title: "What happens when you successfully hit an enemy?", hint: "Do villains have HP or do they just get stunned?", type: "choice", options: [
+            { value: "stun_only", label: "Villain gets stunned (skips next turn)", desc: "You can't kill the villain, only slow it down." },
+            { value: "damage_hp", label: "Villain loses HP", desc: "Villain has a large HP pool and can eventually be defeated." },
+            { value: "stun_and_pushback", label: "Stunned + pushed back tiles", desc: "Stun plus knockback creates distance." }
+        ], allowCustom: true },
+
+        // ── PUZZLES & WIN CONDITION ──
+        { category: "Puzzles & Win Condition", id: "num_pillars", title: "How many pillars/objectives must be activated to open the exit?", hint: "More = longer game. The doc says 'decrypt and activate pillars.'", type: "number", min: 2, max: 8, suffix: "pillars" },
+
+        { category: "Puzzles & Win Condition", id: "decrypt_mechanic", title: "How does decryption/activation work?", hint: "What does a player do when they reach a pillar?", type: "choice", options: [
+            { value: "spend_action", label: "Spend 1 action while on the pillar tile", desc: "Simple — stand on it and use your action." },
+            { value: "roll_check", label: "Spend 1 action + roll a D6 (4+ = success)", desc: "Adds tension. Might take multiple turns." },
+            { value: "collect_keys", label: "Need to find a key/item first, then use it at the pillar", desc: "Adds a scavenger hunt element." },
+            { value: "multi_turn", label: "Takes 2 actions (can be split across turns)", desc: "Forces you to stay near the pillar." },
+            { value: "other", label: "Something else (describe)", desc: "" }
+        ], allowCustom: true },
+
+        { category: "Puzzles & Win Condition", id: "exit_mechanic", title: "How does the exit work once all pillars are activated?", hint: "Does everyone need to reach the exit?", type: "choice", options: [
+            { value: "all_escape", label: "All surviving players must reach the exit tile", desc: "Full co-op — no one left behind." },
+            { value: "majority", label: "At least half the players must escape", desc: "Some can sacrifice themselves." },
+            { value: "any_one", label: "Any one player reaching the exit wins for everyone", desc: "Fastest player can clutch it." }
+        ], allowCustom: true },
+
+        // ── BOARD LAYOUT ──
+        { category: "Board Layout", id: "sectors", title: "How is the board divided into sectors?", hint: "Events reference 'sectors' and 'areas.' The board is 20×20.", type: "choice", options: [
+            { value: "4_quadrants", label: "4 quadrants (10×10 each)", desc: "Simple. Top-left, top-right, bottom-left, bottom-right." },
+            { value: "4x4_sectors", label: "16 sectors (5×5 each, 4×4 grid)", desc: "More granular. Matches the Toxic Gas card referencing sectors 1-16." },
+            { value: "other", label: "Something else", desc: "" }
+        ], allowCustom: true },
+
+        { category: "Board Layout", id: "start_position", title: "Where do players start?", hint: "Starting corner, edge, or center?", type: "choice", options: [
+            { value: "corner", label: "One corner of the board", desc: "Classic — start at one end, exit at the other." },
+            { value: "center", label: "Center of the board", desc: "Surrounded — must push outward." },
+            { value: "random", label: "Random tiles (roll D20s)", desc: "Every game starts differently." },
+            { value: "edge_together", label: "Along one edge, grouped together", desc: "Team starts together, must cross the board." }
+        ], allowCustom: true },
+
+        { category: "Board Layout", id: "villain_start", title: "Where does the villain start?", hint: "Relative to the players.", type: "choice", options: [
+            { value: "opposite_corner", label: "Opposite corner from players", desc: "Gives players time to prepare." },
+            { value: "center", label: "Center of the board", desc: "Equidistant from everything." },
+            { value: "random", label: "Random position (D20s)", desc: "Unpredictable every game." }
+        ], allowCustom: true },
+
+        // ── CARD QUESTIONS ──
+        { category: "Card Decisions", id: "duplicate_medkits", title: "There are 4 MedKit cards — is this intentional?", hint: "They have slightly different wording but do the same thing.", type: "choice", options: [
+            { value: "intentional", label: "Yes, keep all 4", desc: "More healing available = more forgiving." },
+            { value: "reduce_to_2", label: "Reduce to 2 MedKits", desc: "Healing is rarer and more valuable." },
+            { value: "keep_but_unify", label: "Keep 4 but make text identical", desc: "Same count, consistent wording." }
+        ] },
+
+        { category: "Card Decisions", id: "duplicate_tazers", title: "There are 3 Tazer cards with different ranges (3-4 tiles) — intentional?", hint: "Could be variants or duplicates.", type: "choice", options: [
+            { value: "keep_variants", label: "Keep as different variants", desc: "Tazer Mk.I (3 range), Mk.II (4 range) etc." },
+            { value: "unify", label: "Make them all identical", desc: "Pick one range and use it for all." },
+            { value: "reduce", label: "Reduce to 1 or 2 Tazers", desc: "Fewer stun tools." }
+        ] },
+
+        { category: "Card Decisions", id: "backpack_type", title: "The Backpack is typed as 'Equipment' not 'Tool' — what should it be?", hint: "It's the only Equipment card. It doesn't show under any filter in the card manager.", type: "choice", options: [
+            { value: "make_tool", label: "Change it to Tool", desc: "Joins the tool deck. Simplest fix." },
+            { value: "keep_equipment", label: "Keep as Equipment — it's a separate passive category", desc: "Would need a new filter/deck." }
+        ] },
+
+        { category: "Card Decisions", id: "tool_hand_limit", title: "How many tool cards can a player hold at once?", hint: "Without a limit, players could hoard everything.", type: "number", min: 1, max: 10, suffix: "tools max" },
+
+        // ── MISC MECHANICS ──
+        { category: "Other Mechanics", id: "sight_mechanic", title: "What does 'sight' / 'vision' actually do?", hint: "Fog of War says '-1 tile of sight.' But what does sight normally mean?", type: "choice", options: [
+            { value: "no_mechanic", label: "Sight doesn't have a gameplay effect normally", desc: "Only matters when specific events reduce it." },
+            { value: "fog_of_war", label: "Players can only see/interact within their sight range", desc: "Adds hidden information. More complex." },
+            { value: "attack_range", label: "Sight = max range for ranged attacks", desc: "Affects bow, tazer, etc." }
+        ], allowCustom: true },
+
+        { category: "Card Decisions", id: "similar_events", title: "Meteorite & Meteor Impact are very similar. Slime & The Slime too. Keep both?", hint: "Having similar cards increases the chance of that type of event.", type: "choice", options: [
+            { value: "keep_both", label: "Keep both — more chaos is good", desc: "Players might get hit by meteors twice. Fun!" },
+            { value: "merge", label: "Merge them into one card each", desc: "Cleaner deck, more variety." },
+            { value: "differentiate", label: "Keep both but make them more different", desc: "E.g., Meteorite hits one tile, Meteor Impact hits a whole sector." }
+        ] },
+
+        { category: "Other Mechanics", id: "revive_mechanic", title: "How does reviving a knocked-out player work?", hint: "The doc says teammates must help. What exactly do they do?", type: "choice", options: [
+            { value: "adjacent_action", label: "Stand adjacent + spend 1 action", desc: "Simple and clear." },
+            { value: "same_tile_action", label: "Stand on the same tile + spend 1 action", desc: "Must reach the exact tile." },
+            { value: "adjacent_free", label: "Stand adjacent — it's a free action", desc: "Very forgiving, keeps game moving." }
+        ], allowCustom: true },
+
+        { category: "Other Mechanics", id: "ko_penalty", title: "What happens to a knocked-out player until they're revived?", hint: "Do they lose items? Skip turns?", type: "choice", options: [
+            { value: "skip_no_loss", label: "Skip turns, keep all items", desc: "Forgiving — just need a revive." },
+            { value: "skip_drop_items", label: "Skip turns, drop all items on the tile", desc: "Risky — others can pick them up." },
+            { value: "skip_lose_one", label: "Skip turns, lose 1 random tool", desc: "Middle ground." }
+        ], allowCustom: true },
+
+        { category: "Other Mechanics", id: "extra_notes", title: "Anything else you want to add or clarify?", hint: "Free text — any ideas, changes, or notes about the game.", type: "text" }
+    ];
+
+    const STORAGE_KEY = 'helix-alpha-answers';
+    let answers = {};
+
+    function loadAnswers() {
+        try {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) answers = JSON.parse(saved);
+        } catch(e) {}
+    }
+
+    function saveAnswers() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(answers));
+        updateProgress();
+        showToast('Auto-saved!');
+    }
+
+    function showToast(msg) {
+        const toast = document.getElementById('toast');
+        toast.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 1500);
+    }
+
+    function updateProgress() {
+        const total = QUESTIONS.length;
+        const answered = QUESTIONS.filter(q => {
+            const val = answers[q.id];
+            return val !== undefined && val !== '' && val !== null;
+        }).length;
+        document.getElementById('counter').innerHTML = `<strong>${answered}</strong> / ${total} answered`;
+        document.getElementById('progress-bar').style.width = `${(answered / total) * 100}%`;
+
+        // Update section answered state
+        document.querySelectorAll('.section[data-id]').forEach(sec => {
+            const id = sec.dataset.id;
+            const val = answers[id];
+            if (val !== undefined && val !== '' && val !== null) {
+                sec.classList.add('answered');
+            } else {
+                sec.classList.remove('answered');
+            }
+        });
+    }
+
+    function renderSections() {
+        const container = document.getElementById('sections');
+        let html = '';
+        let lastCategory = '';
+
+        QUESTIONS.forEach((q, idx) => {
+            if (q.category !== lastCategory) {
+                lastCategory = q.category;
+                html += `<div class="divider">${q.category}</div>`;
+            }
+
+            html += `<div class="section" data-id="${q.id}">`;
+            html += `<div class="section-number">Question ${idx + 1}</div>`;
+            html += `<h2>${q.title}</h2>`;
+            html += `<p class="hint">${q.hint}</p>`;
+
+            if (q.type === 'choice') {
+                html += `<div class="option-group" id="opts-${q.id}">`;
+                q.options.forEach(opt => {
+                    const sel = answers[q.id] === opt.value ? 'selected' : '';
+                    html += `<button class="option-btn ${sel}" data-qid="${q.id}" data-val="${opt.value}" onclick="selectOption('${q.id}','${opt.value}', this)">`;
+                    html += `<div class="option-label">${opt.label}</div>`;
+                    if (opt.desc) html += `<div class="option-desc">${opt.desc}</div>`;
+                    html += `</button>`;
+                });
+                html += `</div>`;
+                if (q.allowCustom) {
+                    const customVal = (answers[q.id + '_custom']) || '';
+                    html += `<input type="text" id="custom-${q.id}" placeholder="If you chose 'something else', describe here..." value="${customVal}" oninput="saveCustom('${q.id}', this.value)">`;
+                }
+            } else if (q.type === 'text') {
+                const val = answers[q.id] || '';
+                html += `<textarea id="input-${q.id}" placeholder="Type your answer..." oninput="saveText('${q.id}', this.value)">${val}</textarea>`;
+            } else if (q.type === 'number') {
+                const val = answers[q.id] || '';
+                html += `<div class="number-row">`;
+                html += `<input type="number" id="input-${q.id}" min="${q.min}" max="${q.max}" value="${val}" oninput="saveText('${q.id}', this.value)">`;
+                html += `<span>${q.suffix || ''}</span>`;
+                html += `</div>`;
+            }
+
+            html += `</div>`;
+        });
+
+        container.innerHTML = html;
+        updateProgress();
+    }
+
+    function selectOption(qid, value, btn) {
+        answers[qid] = value;
+        const group = document.getElementById('opts-' + qid);
+        group.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        saveAnswers();
+    }
+
+    function saveCustom(qid, value) {
+        answers[qid + '_custom'] = value;
+        saveAnswers();
+    }
+
+    function saveText(qid, value) {
+        answers[qid] = value;
+        saveAnswers();
+    }
+
+    function downloadJSON() {
+        const exportData = { exportedAt: new Date().toISOString(), answers: {} };
+        QUESTIONS.forEach(q => {
+            const entry = { question: q.title, answer: answers[q.id] || null };
+            if (q.allowCustom && answers[q.id + '_custom']) {
+                entry.customNote = answers[q.id + '_custom'];
+            }
+            exportData.answers[q.id] = entry;
+        });
+        const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'helix-alpha-decisions.json';
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast('Downloaded!');
+    }
+
+    function resetAll() {
+        if (confirm('Are you sure you want to reset all answers?')) {
+            answers = {};
+            localStorage.removeItem(STORAGE_KEY);
+            renderSections();
+            showToast('All answers cleared.');
+        }
+    }
+
+    loadAnswers();
+    renderSections();
+    </script>
+</body>
+</html>

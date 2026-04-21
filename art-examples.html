@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helix Alpha — Card Art Examples</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0c10;
+            --surface: #12151c;
+            --surface-2: #1a1e2a;
+            --border: #2a2f3d;
+            --text: #e6edf3;
+            --text-muted: #8b949e;
+            --villain: #f85149;
+            --survivor: #3fb950;
+            --event: #d29922;
+            --tool: #58a6ff;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        .top-bar {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .top-bar a {
+            color: var(--tool);
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+
+        .top-bar a:hover { text-decoration: underline; }
+
+        .hero {
+            text-align: center;
+            padding: 60px 20px 40px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            margin-bottom: 12px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--villain), var(--event), var(--tool));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .badge-villain { background: rgba(248,81,73,0.15); color: var(--villain); border: 1px solid rgba(248,81,73,0.3); }
+        .badge-survivor { background: rgba(63,185,80,0.15); color: var(--survivor); border: 1px solid rgba(63,185,80,0.3); }
+        .badge-event { background: rgba(210,153,34,0.15); color: var(--event); border: 1px solid rgba(210,153,34,0.3); }
+        .badge-tool { background: rgba(88,166,255,0.15); color: var(--tool); border: 1px solid rgba(88,166,255,0.3); }
+
+        .gallery {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .card-showcase {
+            display: flex;
+            gap: 32px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .card-showcase:hover {
+            border-color: var(--text-muted);
+            transform: translateY(-2px);
+        }
+
+        .card-showcase:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .card-img {
+            flex: 0 0 400px;
+            min-height: 320px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .card-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent 60%, var(--surface));
+        }
+
+        .card-showcase:nth-child(even) .card-img::after {
+            background: linear-gradient(-90deg, transparent 60%, var(--surface));
+        }
+
+        .card-info {
+            flex: 1;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .card-info h2 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .card-stats {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            background: var(--surface-2);
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 6px;
+            margin-bottom: 16px;
+            letter-spacing: 0.05em;
+        }
+
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .footer-note {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-note strong { color: var(--text); }
+
+        @media (max-width: 768px) {
+            .card-showcase,
+            .card-showcase:nth-child(even) {
+                flex-direction: column;
+            }
+            .card-img {
+                flex: none;
+                height: 260px;
+            }
+            .card-img::after {
+                background: linear-gradient(180deg, transparent 50%, var(--surface)) !important;
+            }
+            .hero h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <a href="index.html">← Card Manager</a>
+        <a href="game.html">Play Game</a>
+        <a href="questionnaire.html">📋 Questionnaire</a>
+    </div>
+
+    <div class="hero">
+        <h1><span>Card Art Examples</span></h1>
+        <p>AI-generated concept art for Helix Alpha cards. These are examples of what the final printed cards could look like — style and theme can be adjusted.</p>
+    </div>
+
+    <div class="gallery">
+
+        <div class="card-showcase">
+            <div class="card-img" style="background-image: url('Assets/art-examples/stalker.png')"></div>
+            <div class="card-info">
+                <span class="badge badge-villain">Villain</span>
+                <h2>The Stalker</h2>
+                <div class="card-stats">ATK 10 &nbsp;|&nbsp; DEF 10 &nbsp;|&nbsp; MOV 4</div>
+                <p class="card-desc">At the start of the villain turn, the Stalker moves directly towards the closest player. If it's already on the same tile as a player, it attacks them — twice. A relentless hunter that never stops pursuing.</p>
+            </div>
+        </div>
+
+        <div class="card-showcase">
+            <div class="card-img" style="background-image: url('Assets/art-examples/necromancer.png')"></div>
+            <div class="card-info">
+                <span class="badge badge-villain">Villain</span>
+                <h2>Necromancer</h2>
+                <div class="card-stats">ATK 3 &nbsp;|&nbsp; DEF 3 &nbsp;|&nbsp; MOV 3</div>
+                <p class="card-desc">Weak alone, but terrifying over time. At the beginning of the villain turn, roll a D6 and add the number of players. If the total is 6 or more, a zombie spawns in a random location. The board fills with undead.</p>
+            </div>
+        </div>
+
+        <div class="card-showcase">
+            <div class="card-img" style="background-image: url('Assets/art-examples/fighter.png')"></div>
+            <div class="card-info">
+                <span class="badge badge-survivor">Survivor</span>
+                <h2>Fighter</h2>
+                <div class="card-stats">ATK 4 &nbsp;|&nbsp; DEF 3 &nbsp;|&nbsp; MOV 4</div>
+                <p class="card-desc">The team's combat specialist. Can equip 2 weapons simultaneously, and all equipped weapons grant +1 ATK. Defeating an enemy gives the Fighter an extra action — momentum is everything.</p>
+            </div>
+        </div>
+
+        <div class="card-showcase">
+            <div class="card-img" style="background-image: url('Assets/art-examples/meteorite.png')"></div>
+            <div class="card-info">
+                <span class="badge badge-event">Event</span>
+                <h2>Meteorite</h2>
+                <div class="card-stats">Random Coordinate &nbsp;|&nbsp; 4 Tile Radius</div>
+                <p class="card-desc">Choose a random coordinate using D20 dice. Everyone within a 4-tile radius is knocked out. Even the villain gets stunned if caught in the blast. Pure chaos from the sky.</p>
+            </div>
+        </div>
+
+        <div class="card-showcase">
+            <div class="card-img" style="background-image: url('Assets/art-examples/plasma_cannon.png')"></div>
+            <div class="card-info">
+                <span class="badge badge-tool">Tool</span>
+                <h2>Unstable Plasma Cannon</h2>
+                <div class="card-stats">Single Use &nbsp;|&nbsp; High Risk</div>
+                <p class="card-desc">Use this item to stun an enemy instantly. But then roll a D6 — if you get a 1 or 2, you get knocked out by the backfire. Discard after use. Desperate times call for desperate weapons.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-note">
+        <p>Generated with <strong>Imagen 3</strong> by Google DeepMind. Art style can be changed to comic book, pixel art, minimalist, or any other direction — <a href="questionnaire.html" style="color: var(--tool)">fill out the questionnaire</a> to decide.</p>
+    </div>
+</body>
+</html>

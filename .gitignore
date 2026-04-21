@@ -1,4 +1,6 @@
 Assets/
+!Assets/art-examples/
+!Assets/art-examples/*
 .vercel/
 node_modules/
 *.log
