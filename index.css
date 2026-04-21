@@ -44,21 +44,34 @@ body {
     color: var(--secondary-text);
 }
 
+.game-link {
+    color: var(--accent-color);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+    transition: opacity 0.2s ease;
+}
+
+.game-link:hover {
+    opacity: 0.7;
+}
+
 .controls {
     display: flex;
     gap: 10px;
 }
 
 button {
-    padding: 10px 20px;
+    padding: 8px 14px;
     border-radius: 8px;
     border: 1px solid var(--border-color);
     background: white;
     font-weight: 600;
     font-family: inherit;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     cursor: pointer;
     transition: all 0.2s ease;
+    white-space: nowrap;
 }
 
 button:hover {
@@ -89,7 +102,7 @@ button.active:hover {
 .filter-group {
     display: flex;
     gap: 6px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 .card-grid {
