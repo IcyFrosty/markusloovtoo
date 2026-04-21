@@ -1,4 +1,7 @@
-Assets/
+Assets/cards/
+Assets/*.pdf
+Assets/*.docx
+Assets/*.png
 node_modules/
 .git/
 *.log
