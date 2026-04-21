@@ -12,7 +12,7 @@
     <header class="header">
         <div class="title-area">
             <h1>Helix Alpha Card Manager</h1>
-            <p>Digitized and editable game cards</p>
+            <p>Digitized and editable game cards | <a href="game.html" class="game-link">Play Game Prototype</a></p>
         </div>
         <div class="controls">
             <div class="filter-group">
@@ -46,6 +46,21 @@
                     .replace(/"/g, '&quot;');
             }
 
+            function updateFilterCounts(data) {
+                const counts = { all: data.length, tool: 0, villain: 0, survivor: 0, event: 0 };
+                data.forEach(c => {
+                    const type = c.type ? c.type.toLowerCase() : '';
+                    if (counts[type] !== undefined) {
+                        counts[type]++;
+                    }
+                });
+                document.getElementById('filter-all').textContent = `All Cards (${counts.all})`;
+                document.getElementById('filter-tool').textContent = `Tools (${counts.tool})`;
+                document.getElementById('filter-villain').textContent = `Villains (${counts.villain})`;
+                document.getElementById('filter-survivor').textContent = `Survivors (${counts.survivor})`;
+                document.getElementById('filter-event').textContent = `Events (${counts.event})`;
+            }
+
             // Load cards from cards.json
             fetch('cards.json')
                 .then(response => {
@@ -54,6 +69,7 @@
                 })
                 .then(data => {
                     cardsData = data;
+                    updateFilterCounts(data);
                     renderCards(data);
                 })
                 .catch(err => {
