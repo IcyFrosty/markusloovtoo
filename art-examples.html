@@ -165,6 +165,73 @@
             line-height: 1.7;
         }
 
+        .section-title {
+            max-width: 1100px;
+            margin: 0 auto 30px;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title h2 {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+        }
+
+        .section-title .line {
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            max-width: 1100px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+        }
+
+        .icon-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .icon-card:hover {
+            border-color: var(--tool);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .icon-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            background: #000;
+        }
+
+        .icon-card h3 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .icon-card span {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
         .footer-note {
             text-align: center;
             padding: 40px 20px;
@@ -201,8 +268,46 @@
     </div>
 
     <div class="hero">
-        <h1><span>Card Art Examples</span></h1>
-        <p>AI-generated concept art for Helix Alpha cards. These are examples of what the final printed cards could look like — style and theme can be adjusted.</p>
+        <h1><span>Visual Direction</span></h1>
+        <p>Comparing the detailed Concept Art vs. the new Minimalist Icon style for final production.</p>
+    </div>
+
+    <div class="section-title">
+        <h2>Production Style: Minimalist Icons</h2>
+        <div class="line"></div>
+    </div>
+
+    <div class="icon-grid">
+        <div class="icon-card">
+            <img src="Assets/art-examples/icon_medkit.png" alt="MedKit Icon">
+            <h3>MedKit</h3>
+            <span>Tool</span>
+        </div>
+        <div class="icon-card">
+            <img src="Assets/art-examples/icon_stalker.png" alt="Stalker Icon">
+            <h3>Stalker</h3>
+            <span>Villain</span>
+        </div>
+        <div class="icon-card">
+            <img src="Assets/art-examples/icon_ice_age.png" alt="Ice Age Icon">
+            <h3>Ice Age</h3>
+            <span>Event</span>
+        </div>
+        <div class="icon-card">
+            <img src="Assets/art-examples/icon_tazer.png" alt="Tazer Icon">
+            <h3>Tazer</h3>
+            <span>Tool</span>
+        </div>
+        <div class="icon-card">
+            <img src="Assets/art-examples/icon_meteorite.png" alt="Meteorite Icon">
+            <h3>Meteorite</h3>
+            <span>Event</span>
+        </div>
+    </div>
+
+    <div class="section-title">
+        <h2>Initial Concept Art</h2>
+        <div class="line"></div>
     </div>
 
     <div class="gallery">

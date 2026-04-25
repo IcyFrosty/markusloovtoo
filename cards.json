@@ -61,7 +61,7 @@
     "id": "IMG_1485",
     "type": "Event",
     "title": "The Slime",
-    "description": "Roll a D4. The result is which of the 4 areas is covered in slime. Everything in there moves 2 tiles slower. Lasts 2 rounds.",
+    "description": "Roll a D4. The result is which of the 4 areas is covered in slime. Everything in there moves 2 tiles slower. Lasts 2 rounds. Anyone in the corresponding sector is immobilized.",
     "diagram": "grid_2x2",
     "size": "2x Landscape"
   },
@@ -125,7 +125,7 @@
     "id": "IMG_1494",
     "type": "Event",
     "title": "Meteorite",
-    "description": "Choose a random coordinate. Everyone in a 4 tile radius of that tile is knocked out. The monster gets stunned, if in range. Discard after resolving.",
+    "description": "Choose a random coordinate. Everyone in a 4 tile radius of that tile is knocked out (including monsters). The monster gets stunned, if in range. Leave a loot token at the impact coordinates.",
     "size": "2x Landscape"
   },
   {
@@ -157,14 +157,6 @@
     "size": "2x Landscape"
   },
   {
-    "id": "IMG_1499",
-    "type": "Event",
-    "title": "Slime",
-    "description": "Roll a D4. Everyone in the corresponding sector is immobilized.",
-    "diagram": "quadrants_2_1_3_4",
-    "size": "2x Landscape"
-  },
-  {
     "id": "IMG_1500",
     "type": "Event",
     "title": "Lightning",
@@ -182,22 +174,22 @@
     "id": "IMG_1503",
     "type": "Event",
     "title": "Earthquake",
-    "description": "Everyone rolls a D6. On a 1 you lose -1 hp and you are stunned. Monsters too.",
+    "description": "Everyone rolls a D6. On a 1 you are knocked out and stunned. Monsters too.",
     "size": "2x Landscape"
   },
   {
     "id": "IMG_1504",
     "type": "Event",
     "title": "Fog of War",
-    "description": "Everyone has -1 tile of sight. (MOV cards)",
+    "description": "Everyone has -1 tile of sight.",
     "size": "2x Landscape"
   },
   {
     "id": "IMG_1505",
-    "type": "Equipment",
+    "type": "Tool",
     "title": "Backpack",
-    "description": "Allows to cary +2 weight.",
-    "size": "2x Landscape"
+    "description": "Allows to carry +2 weight.",
+    "size": "Poker"
   },
   {
     "id": "IMG_1506",
@@ -214,13 +206,6 @@
     "size": "2x Landscape"
   },
   {
-    "id": "IMG_1508",
-    "type": "Event",
-    "title": "Meteor impact",
-    "description": "Choose a random tile. Everyone in a 4 tile radius gets knocked out (including monsters). Leave a loot token at the impact coordinates.",
-    "size": "2x Landscape"
-  },
-  {
     "id": "IMG_1509",
     "type": "Event",
     "title": "Living rock",
@@ -232,7 +217,7 @@
     "type": "Survivor",
     "title": "Fighter",
     "stats": { "ATK": 4, "DEF": 3, "MOV": 4 },
-    "description": "Can have 2 equipped weapons. All equipped weapons give +1 ATK. If you defeat an enemie, you get an extra action.",
+    "description": "Can have 2 equipped weapons. All equipped weapons give +1 ATK. If you defeat an enemy, you get an extra action.",
     "size": "2x Landscape"
   },
   {
@@ -303,7 +288,7 @@
     "id": "IMG_1519",
     "type": "Tool",
     "title": "MedKit",
-    "description": "Use this card to revive yourself or an adjacent player without costing a turn. (2 uses)",
+    "description": "Use this item to revive yourself or an ally without it costing an action. (2 uses)",
     "size": "Poker"
   },
   {
@@ -317,7 +302,7 @@
     "id": "IMG_1521",
     "type": "Tool",
     "title": "MedKit",
-    "description": "Use this item revive yourself or an ally without it costing an action. (2 uses)",
+    "description": "Use this item to revive yourself or an ally without it costing an action. (2 uses)",
     "size": "Poker"
   },
   {
@@ -338,7 +323,7 @@
     "id": "IMG_1524",
     "type": "Tool",
     "title": "Tazer",
-    "description": "Use it to stun a monster. (4 range) 2 uses (use dice or tokens to mark uses).",
+    "description": "Use it to stun a monster. (4 range) 2 uses.",
     "size": "Poker"
   },
   {
@@ -359,7 +344,7 @@
     "id": "IMG_1527",
     "type": "Tool",
     "title": "Tazer",
-    "description": "Stun someone in a 4 tile range. 2 uses.",
+    "description": "Use it to stun a monster. (4 range) 2 uses.",
     "size": "Poker"
   },
   {
@@ -377,13 +362,6 @@
     "size": "Poker"
   },
   {
-    "id": "IMG_1530",
-    "type": "Tool",
-    "title": "Tazer",
-    "description": "Stun someone in a 3 tile range. 2 uses.",
-    "size": "Poker"
-  },
-  {
     "id": "IMG_1531",
     "type": "Tool",
     "title": "Bow",
@@ -394,7 +372,7 @@
     "id": "IMG_1532",
     "type": "Tool",
     "title": "MedKit",
-    "description": "Use this item to revive yourself or an ally without an action. 2 uses.",
+    "description": "Use this item to revive yourself or an ally without it costing an action. (2 uses)",
     "size": "Poker"
   },
   {
@@ -422,7 +400,7 @@
     "id": "IMG_1536",
     "type": "Tool",
     "title": "MedKit",
-    "description": "Use this item to revive yourself or an ally without it costing an action. 2 uses.",
+    "description": "Use this item to revive yourself or an ally without it costing an action. (2 uses)",
     "size": "Poker"
   }
 ]
