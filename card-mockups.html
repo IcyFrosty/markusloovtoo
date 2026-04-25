@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helix Alpha — Final Card Mockups</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0f1117;
+            --card-bg: #161b22;
+            --border: #30363d;
+            --text: #e6edf3;
+            --text-muted: #8b949e;
+            --accent-villain: #f85149;
+            --accent-survivor: #3fb950;
+            --accent-event: #d29922;
+            --accent-tool: #58a6ff;
+            
+            /* Physical Sizes (approximate for screen display) */
+            --poker-width: 350px;
+            --poker-height: 488px;
+            --landscape-width: 600px;
+            --landscape-height: 420px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            padding: 50px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .header {
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .header h1 { font-size: 2.5rem; font-weight: 900; margin-bottom: 10px; }
+        .header p { color: var(--text-muted); line-height: 1.6; }
+
+        /* Card Base Styles */
+        .card {
+            background: var(--card-bg);
+            border: 2px solid var(--border);
+            border-radius: 18px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-inner {
+            padding: 24px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 14px;
+            margin: 4px;
+        }
+
+        /* Landscape Card (Survivors, Villains, Events) */
+        .card-landscape {
+            width: var(--landscape-width);
+            height: var(--landscape-height);
+        }
+
+        /* Poker Card (Tools) */
+        .card-poker {
+            width: var(--poker-width);
+            height: var(--poker-height);
+        }
+
+        /* Card Header */
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+        }
+
+        .card-type-icon {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        /* Art/Icon Area */
+        .art-area {
+            flex: 1;
+            background: #000;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .art-area img {
+            max-width: 80%;
+            max-height: 80%;
+            object-fit: contain;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: flex;
+            gap: 10px;
+        }
+
+        .stat-box {
+            background: #21262d;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 8px 12px;
+            flex: 1;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 0.6rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        /* Description */
+        .card-body {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--text-muted);
+        }
+
+        .card-body strong { color: var(--text); }
+
+        /* Footer */
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.6rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-muted);
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Type Accents */
+        .villain { border-color: var(--accent-villain); }
+        .villain .card-title { color: var(--accent-villain); }
+        .villain .stat-value { color: var(--accent-villain); }
+
+        .survivor { border-color: var(--accent-survivor); }
+        .survivor .card-title { color: var(--accent-survivor); }
+        .survivor .stat-value { color: var(--accent-survivor); }
+
+        .event { border-color: var(--accent-event); }
+        .event .card-title { color: var(--accent-event); }
+
+        .tool { border-color: var(--accent-tool); }
+        .tool .card-title { color: var(--accent-tool); }
+
+        .mockup-label {
+            position: absolute;
+            top: -25px;
+            left: 0;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+        }
+
+        .card-container { position: relative; }
+
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Helix Alpha Card Mockups</h1>
+        <p>Production-ready layout designs using the new minimalist icon style. These mockups show how the rules, stats, and artwork integrate into the final printable frames.</p>
+    </div>
+
+    <!-- 1. VILLAIN: THE STALKER -->
+    <div class="card-container">
+        <div class="mockup-label">Villain Card (2x Landscape)</div>
+        <div class="card card-landscape villain">
+            <div class="card-inner">
+                <div class="card-header">
+                    <div class="card-title">The Stalker</div>
+                    <div class="card-type-icon">💀</div>
+                </div>
+                <div class="art-area">
+                    <img src="Assets/art-examples/icon_stalker.png" alt="Stalker Icon">
+                </div>
+                <div class="stats-bar">
+                    <div class="stat-box">
+                        <span class="stat-label">ATK</span>
+                        <span class="stat-value">10</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">DEF</span>
+                        <span class="stat-value">10</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">MOV</span>
+                        <span class="stat-value">4</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    At the start of the villain turn, the <strong>Stalker</strong> moves directly towards the closest player. If it's already on the same tile as a player, it attacks them twice instead.
+                </div>
+                <div class="card-footer">
+                    <span>IMG_1514</span>
+                    <span>SIZE: 2x LANDSCAPE</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. SURVIVOR: FIGHTER -->
+    <div class="card-container">
+        <div class="mockup-label">Survivor Card (2x Landscape)</div>
+        <div class="card card-landscape survivor">
+            <div class="card-inner">
+                <div class="card-header">
+                    <div class="card-title">Fighter</div>
+                    <div class="card-type-icon">🛡️</div>
+                </div>
+                <div class="art-area">
+                    <img src="Assets/art-examples/fighter.png" alt="Fighter Icon" style="filter: grayscale(1) contrast(200%) brightness(150%)">
+                </div>
+                <div class="stats-bar">
+                    <div class="stat-box">
+                        <span class="stat-label">ATK</span>
+                        <span class="stat-value">4</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">DEF</span>
+                        <span class="stat-value">3</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">MOV</span>
+                        <span class="stat-value">4</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    Can have <strong>2 equipped weapons</strong>. All equipped weapons give +1 ATK. If you defeat an enemy, you get an extra action.
+                </div>
+                <div class="card-footer">
+                    <span>IMG_1510</span>
+                    <span>SIZE: 2x LANDSCAPE</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. EVENT: METEORITE -->
+    <div class="card-container">
+        <div class="mockup-label">Event Card (2x Landscape)</div>
+        <div class="card card-landscape event">
+            <div class="card-inner">
+                <div class="card-header">
+                    <div class="card-title">Meteorite</div>
+                    <div class="card-type-icon">⚡</div>
+                </div>
+                <div class="art-area">
+                    <img src="Assets/art-examples/icon_meteorite.png" alt="Meteorite Icon">
+                </div>
+                <div class="card-body">
+                    Choose a random coordinate. Everyone in a <strong>4 tile radius</strong> of that tile is <strong>knocked out</strong>. The monster gets stunned if in range. Leave a loot token at the impact site.
+                </div>
+                <div class="card-footer">
+                    <span>IMG_1494</span>
+                    <span>SIZE: 2x LANDSCAPE</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. TOOL: MEDKIT -->
+    <div class="card-container">
+        <div class="mockup-label">Tool Card (Poker Size)</div>
+        <div class="card card-poker tool">
+            <div class="card-inner">
+                <div class="card-header">
+                    <div class="card-title">MedKit</div>
+                    <div class="card-type-icon">🔧</div>
+                </div>
+                <div class="art-area">
+                    <img src="Assets/art-examples/icon_medkit.png" alt="MedKit Icon">
+                </div>
+                <div class="stats-bar">
+                    <div class="stat-box">
+                        <span class="stat-label">USES</span>
+                        <span class="stat-value">2</span>
+                    </div>
+                </div>
+                <div class="card-body" style="flex: 1; display: flex; align-items: center;">
+                    Use this item to <strong>revive yourself or an ally</strong> without it costing an action. 
+                </div>
+                <div class="card-footer">
+                    <span>IMG_1519</span>
+                    <span>SIZE: POKER</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. TOOL: TAZER -->
+    <div class="card-container">
+        <div class="mockup-label">Tool Card (Poker Size)</div>
+        <div class="card card-poker tool">
+            <div class="card-inner">
+                <div class="card-header">
+                    <div class="card-title">Tazer</div>
+                    <div class="card-type-icon">🔧</div>
+                </div>
+                <div class="art-area">
+                    <img src="Assets/art-examples/icon_tazer.png" alt="Tazer Icon">
+                </div>
+                <div class="stats-bar">
+                    <div class="stat-box">
+                        <span class="stat-label">RANGE</span>
+                        <span class="stat-value">4</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">USES</span>
+                        <span class="stat-value">2</span>
+                    </div>
+                </div>
+                <div class="card-body" style="flex: 1; display: flex; align-items: center;">
+                    Use it to <strong>stun a monster</strong> in range. Stunned enemies skip their next turn.
+                </div>
+                <div class="card-footer">
+                    <span>IMG_1524</span>
+                    <span>SIZE: POKER</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
